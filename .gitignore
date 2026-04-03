@@ -2,7 +2,6 @@ venv/
 __pycache__/
 *.pyc
 mlruns/
-models/
 data/processed/
 .ipynb_checkpoints/
 .env
