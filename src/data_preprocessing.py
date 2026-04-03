@@ -8,7 +8,7 @@ def load_data(path):
 
 
 def clean_data(df):
-    # Drop useless column
+    # Drop identifier column
     df = df.drop(columns=["customer_id"])
     return df
 
@@ -17,11 +17,12 @@ def split_data(df):
     X = df.drop("default", axis=1)
     y = df["default"]
 
-    return train_test_split(X, y, test_size=0.2, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(
+        X,
+        y,
+        test_size=0.2,
+        random_state=42,
+        stratify=y
+    )
 
-if __name__ == "__main__":
-    df = load_data("data/raw/Loan_Data.csv")
-    df = clean_data(df)
-    X_train, X_test, y_train, y_test = split_data(df)
-
-    print(X_train.shape, X_test.shape)
+    return X_train, X_test, y_train, y_test
