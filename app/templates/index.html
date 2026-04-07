@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Default Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #e9eef5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 450px;
+            margin: 40px auto;
+            background: #7f8fa3;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        h1 {
+            color: #0d47ff;
+            margin-bottom: 25px;
+            font-size: 28px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            color: #0d47ff;
+            font-weight: bold;
+        }
+
+        input {
+            width: 85%;
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #f0f0f0;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            color: #222;
+        }
+
+        .error {
+            margin-top: 20px;
+            color: red;
+            font-weight: bold;
+            background: #fff;
+            padding: 10px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Loan Default Prediction</h1>
+
+        <form method="POST">
+            <label for="credit_lines_outstanding">Credit Lines Outstanding</label>
+            <input type="number" step="any" name="credit_lines_outstanding" required>
+
+            <label for="loan_amt_outstanding">Loan Amount Outstanding</label>
+            <input type="number" step="any" name="loan_amt_outstanding" required>
+
+            <label for="total_debt_outstanding">Total Debt Outstanding</label>
+            <input type="number" step="any" name="total_debt_outstanding" required>
+
+            <label for="income">Income</label>
+            <input type="number" step="any" name="income" required>
+
+            <label for="years_employed">Years Employed</label>
+            <input type="number" step="any" name="years_employed" required>
+
+            <label for="fico_score">FICO Score</label>
+            <input type="number" step="any" name="fico_score" required>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction is not none %}
+        <div class="result">
+            <h3>Prediction Result</h3>
+            <p><strong>Prediction:</strong> {{ prediction }}</p>
+            <p><strong>Default Probability:</strong> {{ default_probability }}</p>
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="error">
+            Error: {{ error }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
